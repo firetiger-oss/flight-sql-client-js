@@ -1,5 +1,5 @@
 {
-  "name": "flight-sql-client",
+  "name": "@firetiger/flight-sql-client",
   "version": "0.1.0",
   "description": "A TypeScript/JavaScript client for Apache Arrow Flight and Flight SQL protocols",
   "author": "Firetiger Inc",
