@@ -40,6 +40,9 @@ export class FlightClient {
     const metadata = new grpc.Metadata();
     if (this.config.token) {
       metadata.add("authorization", `Bearer ${this.config.token}`)
+    } else if (this.config.username && this.config.password) {
+      const credential = Buffer.from(`${this.config.username}:${this.config.password}`).toString('base64');
+      metadata.add("authorization", `Basic ${credential}`);
     }
 
     return metadata;
@@ -62,7 +65,7 @@ export class FlightClient {
 
       this.client = new FlightServiceClient(address, this.credentials, options);
 
-      if (this.config.token) {
+      if (this.config.token || (this.config.username && this.config.password)) {
         await this.authenticate();
       }
     } catch (error) {
