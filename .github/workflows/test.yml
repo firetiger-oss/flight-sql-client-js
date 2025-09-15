@@ -21,6 +21,9 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Generate protobuf types
+        run: npm run proto:generate
+
       - name: Run type check
         run: npm run typecheck
 
