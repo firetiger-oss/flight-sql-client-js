@@ -19,7 +19,9 @@
     "LICENSE"
   ],
   "scripts": {
+    "prebuild": "npm run clean && npm run proto:generate",
     "build": "tsc -p tsconfig.json",
+    "postbuild": "cp -r src/generated dist/generated",
     "clean": "rimraf dist/",
     "dev": "tsc -p tsconfig.json --watch",
     "test": "jest",
@@ -27,7 +29,7 @@
     "lint": "eslint src test --fix",
     "lint:ci": "eslint src test",
     "typecheck": "tsc --noEmit",
-    "prepublishOnly": "npm run clean && npm run build && npm test && npm run lint:ci",
+    "prepublishOnly": "npm run build && npm test && npm run lint:ci",
     "proto:generate": "grpc_tools_node_protoc --plugin=protoc-gen-ts=./node_modules/.bin/protoc-gen-ts --ts_out=grpc_js:./src/generated --js_out=import_style=commonjs,binary:./src/generated --grpc_out=grpc_js:./src/generated proto/*.proto"
   },
   "keywords": [
