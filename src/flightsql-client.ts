@@ -258,10 +258,7 @@ export class FlightSQLClient extends FlightClient {
       if (tableName) command.setTableNameFilterPattern(tableName);
       if (tableTypes) command.setTableTypesList(tableTypes);
 
-      const descriptor = new FlightDescriptor();
-      descriptor.setType(FlightDescriptor.DescriptorType.CMD);
-      descriptor.setCmd(command.serializeBinary());
-
+      const descriptor = this.createCommandDescriptor(command, FlightSQLClient.TYPE_URLS.COMMAND_GET_TABLES);
       const flightInfo = await this.getFlightInfo(descriptor);
       const endpoints = flightInfo.getEndpointList();
 
