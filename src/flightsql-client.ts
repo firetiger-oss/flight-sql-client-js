@@ -127,7 +127,7 @@ export class FlightSQLClient extends FlightClient {
       const results = await this.doAction(action as any);
 
       if (results.length === 0) {
-        throw new FlightSQLError('No results returned from prepare statement');
+        throw new FlightSQLError('No results returned from prepared statement');
       }
 
       const handle = results[0].getBody_asU8();
